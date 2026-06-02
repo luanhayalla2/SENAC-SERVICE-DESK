@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: senac_backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=senac_pass
+      - DB_NAME=senac_service_desk
+    depends_on:
+      - db
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/uploads:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: senac_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/public:/usr/share/nginx/html/public
+      - ./frontend/src:/usr/share/nginx/html/src
+    # Note: If you want Nginx reverse proxy routing instead of directly exposing frontend,
+    # you can route everything through the dedicated nginx service below.
+
+  nginx:
+    image: nginx:alpine
+    container_name: senac_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend/src:/usr/share/nginx/html/src:ro
+      - ./frontend/public:/usr/share/nginx/html/public:ro
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8.0
+    container_name: senac_db
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=senac_pass
+      - MYSQL_DATABASE=senac_service_desk
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+      - ./database/seeds.sql:/docker-entrypoint-initdb.d/2_seeds.sql
+
+volumes:
+  db_data:
