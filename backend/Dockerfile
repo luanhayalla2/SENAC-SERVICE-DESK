@@ -4,8 +4,8 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install app dependencies
-COPY package.json package-lock.json* ./
-RUN npm ci --only=production
+COPY package.json ./
+RUN npm install
 
 # Copy source code
 COPY src ./src

@@ -57,6 +57,15 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/knowledge', knowledgeRoutes);
 app.use('/api/notifications', notificationRoutes);
 
+// Root route for health check / browser verification
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'SENAC Service Desk API is running natively.',
+    version: '1.0.0'
+  });
+});
+
 // Error handling (must be after routes)
 app.use(errorMiddleware);
 
