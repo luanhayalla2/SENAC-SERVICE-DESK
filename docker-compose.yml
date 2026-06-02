@@ -53,7 +53,7 @@ services:
     image: mysql:8.0
     container_name: senac_db
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=senac_pass
       - MYSQL_DATABASE=senac_service_desk
