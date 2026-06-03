@@ -1,6 +1,7 @@
 // middlewares/rateLimitMiddleware.js
 const rateLimit = require('express-rate-limit');
-const { RateLimiterMemory } = require('rate-limiter-flexible');
+// Removed unused RateLimiterMemory import to avoid missing module error.
+
 
 // General API rate limiter (100 requests per minute)
 const apiLimiter = rateLimit({

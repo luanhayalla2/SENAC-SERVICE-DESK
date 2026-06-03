@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: senac_backend
     ports:
-      - "3000:3000"
+      - "3003:3000"
     environment:
       - NODE_ENV=development
       - PORT=3000
@@ -27,11 +27,11 @@ services:
       dockerfile: Dockerfile
     container_name: senac_frontend
     ports:
-      - "80:80"
+      - "8081:80"
     depends_on:
       - backend
     volumes:
-      - ./frontend/public:/usr/share/nginx/html/public
+      - ./frontend/public:/usr/share/nginx/html
       - ./frontend/src:/usr/share/nginx/html/src
     # Note: If you want Nginx reverse proxy routing instead of directly exposing frontend,
     # you can route everything through the dedicated nginx service below.
@@ -45,7 +45,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./frontend/src:/usr/share/nginx/html/src:ro
-      - ./frontend/public:/usr/share/nginx/html/public:ro
+      - ./frontend/public:/usr/share/nginx/html:ro
     depends_on:
       - backend
 
@@ -53,7 +53,7 @@ services:
     image: mysql:8.0
     container_name: senac_db
     ports:
-      - "3307:3306"
+      - "3308:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=senac_pass
       - MYSQL_DATABASE=senac_service_desk

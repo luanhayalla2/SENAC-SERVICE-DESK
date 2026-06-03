@@ -1,7 +1,7 @@
 FROM nginx:alpine
 
 # Copy the frontend files to the Nginx html directory
-COPY public/ /usr/share/nginx/html/public/
+COPY public/ /usr/share/nginx/html/
 COPY src/ /usr/share/nginx/html/src/
 
 # Assuming there is an index.html at the root of frontend or inside src
