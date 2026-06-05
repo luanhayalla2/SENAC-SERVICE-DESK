@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAC Service Desk</title>
+    <!-- Web Manifest -->
+    <link rel="manifest" href="../public/manifest.json">
+    <link rel="icon" href="../public/favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Baseline CSS Variables matching SENAC palette and dark mode */
+        :root {
+            --senac-blue: #004A8D;
+            --senac-orange: #F58220;
+            --bg-color: #0f172a; /* Dark background */
+            --surface-color: rgba(30, 41, 59, 0.7); /* Glassmorphism base */
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border-radius: 16px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Container */
+        .glass-container {
+            background: var(--surface-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animated Background Blobs */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.5;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        .blob-1 {
+            background: var(--senac-blue);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+        }
+        .blob-2 {
+            background: var(--senac-orange);
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            bottom: -50px;
+            right: -50px;
+            animation-delay: -5s;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--senac-orange);
+            color: #fff;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245, 130, 32, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 130, 32, 0.5);
+            background: #ff983f;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 30px) scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <div class="glass-container">
+        <h1>SENAC Desk</h1>
+        <p>A central unificada para gestão de chamados. Acesso rápido, suporte eficiente.</p>
+        <!-- Redirects to the login page (to be created) -->
+        <a href="pages/login.html" class="btn-primary">Acessar o Sistema</a>
+    </div>
+
+    <script>
+        // Temporary redirection script for demonstration
+        // Normally, you'd check auth state here.
+        document.querySelector('.btn-primary').addEventListener('click', (e) => {
+            // Optional: add loading micro-animation before navigating
+            e.target.innerHTML = 'Carregando...';
+        });
+    </script>
+</body>
+</html>

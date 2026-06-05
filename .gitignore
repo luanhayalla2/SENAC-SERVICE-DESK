@@ -1,0 +1,14 @@
+node_modules/
+.env
+dist/
+coverage/
+*.log
+uploads/chamados/*
+!uploads/chamados/.gitkeep
+uploads/usuarios/*
+!uploads/usuarios/.gitkeep
+uploads/base-conhecimento/*
+!uploads/base-conhecimento/.gitkeep
+database/backups/*
+!database/backups/.gitkeep
+.DS_Store

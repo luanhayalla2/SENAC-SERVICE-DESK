@@ -1,0 +1,1 @@
+-- SENAC Service Desk Database Schema Placeholder
